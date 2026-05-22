@@ -1,71 +1,7 @@
-
-
-
 # Elaboración de documentación técnica y uso de aplicaciones de propósito general.
 # Marco López Alonso.
 # Desarrollo de aplicaciones web 1.
 # 15/05/2026
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Índice:
-Análisis de Necesidades:	3
-¿Qué problema de la empresa resolvemos con Guacamole y Docker?	3
-¿Por qué elegimos esta solución y no conectar directamente por RDP a cada máquina?	3
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # 1. Análisis de Necesidades:
