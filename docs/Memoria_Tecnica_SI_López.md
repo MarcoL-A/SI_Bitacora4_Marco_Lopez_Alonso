@@ -26,4 +26,14 @@ La elección de una arquitectura basada en Apache Guacamole sobre Docker, en lug
 Para esta primera parte del nuevo trabajo voy a realizar con Google Sheets un despliegue de soluciones de software de nivel profesional, la viabilidad económica y la optimización de recursos, ya que estos son pilares tan críticos como la calidad del código. Por lo que he diseñado esto:
 <img width="1099" height="233" alt="image" src="https://github.com/user-attachments/assets/a829bb8b-3166-4a55-bd5e-662e5922e1a9" />
 
+# 3. Estrategia de Despliegue y Comunicación
 
+El flujo de empaquetado y traslado de la aplicación desde el entorno de desarrollo local hacia la instancia de producción cloud se realizará mediante el protocolo seguro SFTP (SSH File Transfer Protocol), operando de forma estricta sobre el puerto criptográfico SSH (puerto 22). Se descarta explícitamente el uso del protocolo FTP tradicional, dado que este último transmite tanto las credenciales de administración como el código fuente en texto plano, exponiendo la infraestructura a ataques de interceptación de tráfico "Man-in-the-Middle". 
+
+El uso de SFTP garantiza que todo el flujo de datos, comandos y autenticación viaje cifrado mediante algoritmos de clave pública/privada (RSA/ED25519), deshabilitando el acceso por contraseña para mitigar ataques de fuerza bruta. En el flujo de trabajo del proyecto, este canal seguro se integrará dentro de una canalización automatizada de Integración y Despliegue Continuo (CI/CD). Al realizar un "push" a la rama principal del repositorio, un corredor "runner" seguro autenticará la sesión utilizando variables de entorno protegidas e inyectará los artefactos de la aplicación de manera directa y aislada en el servidor Cloud.
+
+## Mensajería Electrónica e Integración de Alertas Automáticas
+
+Para asegurar el trabajo colaborativo y la alta disponibilidad de la infraestructura, el equipo técnico centralizará la comunicación operativa en un espacio de trabajo de Slack. En lugar de depender de revisiones manuales, se configurará un flujo de monitorización automatizado utilizando agentes ligeros en el servidor como AWS CloudWatch o un exportador de métricas enlazado a Prometheus.
+
+Este sistema se conectará a Slack mediante un "Incoming Webhook". De este modo, si la infraestructura sufre una caída del servicio, picos de uso de CPU que superen el 90% de forma sostenida, o intentos fallidos de acceso SSH, el servidor enviará de forma autónoma una alerta prioritaria en tiempo real al canal común. Esta estrategia automatizada reduce drásticamente el Tiempo Medio de Recuperación MTTR y centraliza la auditoría de incidentes en un único entorno profesional.
